@@ -18,17 +18,14 @@ In contrast,vision based methods require only a camera,thus realizing a natural 
 
 ## Dataset
 
-The dataset for the project was collected manually using a webcam in the author’s personal computer.A code was written
-to automate and speed up the process where in multiple images were taken and stored in the respective directories.  
-The dataset consists of 2320 images each 200*200 pixels and three channel wide,divided into 2000 training and 320 test
-images.  
+The dataset for the project was collected manually using a webcam in the author’s personal computer.A code was written to automate and speed up the process where in multiple images were taken and stored in the respective directories.    
+The dataset consists of 2320 images each 200*200 pixels and three channel wide,divided into 2000 training and 320 test images.    
 Further,each class has 500 training and 80 test images and the classes of gesture which are as follows:
 * Peace
 * Punch
 * Stop
 * Thumbs_up    
-Each image was first shot using a webcam and a binary mask was then applied to obtaining a binarized and thresholded
-image.Binary mask has been discussed in the preprocessing section in detail.  
+Each image was first shot using a webcam and a binary mask was then applied to obtaining a binarized and thresholded image.Binary mask has been discussed in the preprocessing section in detail.  
 The training data was used to train the network weights and the test data to validate the training.  
 
 
@@ -43,11 +40,11 @@ In this mode the image is first converted into a grayscale using OpenCV command 
 The adaptive feature allows the model to select a threshold as per the image and thus making the code more robust to noise.   
 Finally,the thresholded image is input to the model for classification.This mode finds it use when you have an empty background without any other objects like a white wall or a whiteboard.
 
-![image](https://github.com/chitransh1998/Gesture-Recognition/blob/main/Dataset.png?raw=true)
-*L to R: Thumbs_up, Stop, Punch, Peace*
+![image](https://github.com/chitransh1998/Gesture-Recognition/blob/main/Binary%20Mode%20Steps.png?raw=true)
+*Binary Mode Processing Steps*
 
-![image](https://github.com/chitransh1998/Gesture-Recognition/blob/main/Dataset.png?raw=true)
-*L to R: Thumbs_up, Stop, Punch, Peace*
+![image](https://github.com/chitransh1998/Gesture-Recognition/blob/main/Binary%20Mode%20Steps%20Visual.png?raw=true)
+*Visualization of various steps in Binary Mode Processing (From Top left: Original image, Grayscale Image, Gaussian Blurring, Adaptive Thresholding, Final Output)*
 
 ## Skin Mode Processing
 In this mode the source image first converted from RGB to YCrCb space using the BGR2YCR_CB function in OpenCV and saved with a different name.YCbCr represents a family of color spaces used as part of the color image pipeline in video and digital photography systems.Here,Y represents the luminance component and Cb and Cr represent the blue-difference and red-difference chroma components.  
@@ -58,11 +55,11 @@ Then contours are detected in the regions with the skin tone and finally the det
 The original source image is then converted from RGB to GRAYSCALE and then binarized using cv2.threshold function.  
 Finally the binarized image is passed to the neural network for classification.  
 
-![image](https://github.com/chitransh1998/Gesture-Recognition/blob/main/Dataset.png?raw=true)
-*L to R: Thumbs_up, Stop, Punch, Peace*
+![image](https://github.com/chitransh1998/Gesture-Recognition/blob/main/Skin%20Mode%20Steps%20Algo.png?raw=true)
+*Steps in Skin Mode Processing*
 
-![image](https://github.com/chitransh1998/Gesture-Recognition/blob/main/Dataset.png?raw=true)
-*L to R: Thumbs_up, Stop, Punch, Peace*
+![image](https://github.com/chitransh1998/Gesture-Recognition/blob/main/Skin%20Mode%20Steps%20Visual.png?raw=true)
+*Visualization of various steps in Skin Mode Processing(From Top Left:Original Image, YCrCb Image, Skin Regions in Image, Source image with contours, Binarized final image with skin boundaries)*
 
 ## Building the Model
 
@@ -79,27 +76,28 @@ relevant information from the input data,so that the desired task can be perform
 
 The network consists of two convolutional layers with a ReLU activation function..Max Pooling in two dimensions and dropout layers have also been added to reduce overfitting to the training fata.
 
-![image](https://github.com/chitransh1998/Gesture-Recognition/blob/main/Dataset.png?raw=true)
-*L to R: Thumbs_up, Stop, Punch, Peace*
+![image](https://github.com/chitransh1998/Gesture-Recognition/blob/main/Feature%20Extraction_structure.png?raw=true)
+*Structure of Feature Extraction*
 
-![image](https://github.com/chitransh1998/Gesture-Recognition/blob/main/Dataset.png?raw=true)
-*L to R: Thumbs_up, Stop, Punch, Peace*
+![image](https://github.com/chitransh1998/Gesture-Recognition/blob/main/Feature_Extraction_Visualization.png?raw=true)
+*Visualization of Feature Extraction for Stop Gesture*
 
 ### Classification
 Image Classification is assigning pixels in image to categories or classes of interest.In order to achieve this,the relationship between the data and classes into which they are classified must be well understood.To achieve this,we feed the features extracted using the convolution layer into a fully connected or dense layer.
 
 The dense layer gets a horizontal input from the feature extraction part.There are three dense layers with ReLu activation functions.Each layer if followed by a dropout layer to reduce overfitting.The output layer consists of four outputs one for each gesture and has sigmoid activation function to give probabilistic interpretation of the outputs.
 
-![image](https://github.com/chitransh1998/Gesture-Recognition/blob/main/Dataset.png?raw=true)
-*L to R: Thumbs_up, Stop, Punch, Peace*
+![image](https://github.com/chitransh1998/Gesture-Recognition/blob/main/Classification_structure.png?raw=true)
+*Structure of the Classification part.*
 
-![image](https://github.com/chitransh1998/Gesture-Recognition/blob/main/Dataset.png?raw=true)
-*L to R: Thumbs_up, Stop, Punch, Peace*
+![image](https://github.com/chitransh1998/Gesture-Recognition/blob/main/Model_Structure_2.png?raw=true)
+*Visualization of the roles of Feature extraction and Classification in a neural network*
+
+![image](https://github.com/chitransh1998/Gesture-Recognition/blob/main/Model_Structure.png?raw=true)
+*Complete Model Structure*
 
 ## Training the Model
-After building the model,it is compiled where the backend automatically chooses the best way to represent the network for
-training and making predictions to run on hardware.It uses efficient numerical libraries like Theano or tensorflow for the
-same.Training means finding the best set of weights and biases to make a prediction for the problem.  
+After building the model,it is compiled where the backend automatically chooses the best way to represent the network fortraining and making predictions to run on hardware.It uses efficient numerical libraries like Theano or tensorflow for the same.Training means finding the best set of weights and biases to make a prediction for the problem.  
 
 The categorical cross entropy function is used to accuracy and evaluating the model.  
 Adam optimizer is used to search for different weights to make prediction for this problem.  
@@ -115,7 +113,7 @@ Adam optimizer is used to search for different weights to make prediction for th
 Three models were trained using the above specified criteria and making small changes.The model with the highest accuracy
 and minimum loss was taken.  
 
-![image](https://github.com/chitransh1998/Gesture-Recognition/blob/main/Dataset.png?raw=true)
+![image](https://github.com/chitransh1998/Gesture-Recognition/blob/main/Model%20training.png?raw=true)
 *Model training*
 
 ## Results
@@ -127,42 +125,30 @@ The training results of the proposed model were found as follows:
 
 A high training accuracy was observed due to the high amount of data available and well-tuned structure of the neural network. The model was then tested on live images using a webcam and the results were found to be satisfactory.    
 
-![image](https://github.com/chitransh1998/Gesture-Recognition/blob/main/Dataset.png?raw=true)
-*Curves*
+![image](https://github.com/chitransh1998/Gesture-Recognition/blob/main/Loss_Curves.png?raw=true)
+*Loss and Accuracy Curves for Training and Test*
 The training and the testing accuracy curves show a steady increase in accuracy as the number of epochs progresses.Similarly,there is consistent decrease the testing and training loss with the subsequent epoch.Hence,the model
 behaves well suited.  
 Previously,I was using simply images with clean background to recognize gestures.Now,with earlier discussed pre-processing techniques it was possible to recognize gestures even without clear backgrounds.  
+
+Link to video of live testing of the models:
+1. [Binary Mode Processing](https://youtu.be/C6c96hl6DBg)
+2. [Skin Mode Processing](https://youtu.be/pnGfX5n7TIo)
 
 ## Next Steps
 The high training accuracy shows that the model might have overfitted to the training data.Hence,some alternate methods
 and possible changes to improve the model are as follows:
 
-● Regularization: Regularization modifies the objective
-function that we minimize by adding additional terms
-that penalize large weights. In other words, we change
-the objective function so that it becomes Error+λf(θ),
-where f(θ) grows larger as the components of θ grow
-larger and λ is the regularization strength (a
-hyper-parameter for the learning algorithm).The most
-common type of regularization is L2 regularization. It
-can be implemented by augmenting the error function
-with the squared magnitude of all weights in the
-neural network. In other words, for every weight w in
-the neural network, we add 1/2 λw^2 to the error
-function. The L2 regularization has the intuitive
-interpretation of heavily penalizing "peaky" weight
-vectors and preferring diffuse weight vectors
-● Early stopping : With early stopping, the choice of the
-validation set is also important. The validation set
-should be representative of all points in the training
-set.When you use Bayesian regularization, it is
-important to train the network until it reaches
-convergence. The sum-squared error, the sum-squared
-weights, and the effective number of parameters
-should reach constant values when the network has
-converged.
-● Data Augmentation:There are some data augmentation
-techniques such as scaling, translation, rotation,
-flipping,resizing.Data augmentation can help reduce
-the manual interventation required to developed
-meaningful information and insight of business data,
+1. **Regularization**: Regularization modifies the objective function that we minimize by adding additional terms that penalize large weights. In other words, we change the objective function so that it becomes Error+λf(θ), where f(θ) grows larger as the components of θ grow larger and λ is the regularization strength (a hyper-parameter for the learning algorithm).The most common type of regularization is L2 regularization. It can be implemented by augmenting the error function with the squared magnitude of all weights in the neural network. In other words, for every weight w in the neural network, we add 1/2 λw^2 to the error function.   
+The L2 regularization has the intuitiv interpretation of heavily penalizing "peaky" weight vectors and preferring diffuse weight vectors.  
+
+2. **Early stopping** : With early stopping, the choice of the validation set is also important. The validation set should be representative of all points in the training set.When you use Bayesian regularization, it is important to train the network until it reaches convergence. The sum-squared error, the sum-squared weights, and the effective number of parameters should reach constant values when the network has converged.
+   
+3. **Data Augmentation**: There are some data augmentation techniques such as scaling, translation, rotation, flipping,resizing.Data augmentation can help reduce the manual interventation required to developed meaningful information and insight of business data, as well as significantly enhance data quality.Data augmentation techniques using Keras were explored and these could be used to train the model to reduce overfitting.  
+These changes are to be made in the future versions of this model.Some of the results of the augmented image of stop are shown below.Keras was used for achieving data augmentation.
+
+![image](https://github.com/chitransh1998/Gesture-Recognition/blob/main/Data_Augmentation.png?raw=true)
+*Data Augmentation Results*
+
+![image](https://github.com/chitransh1998/Gesture-Recognition/blob/main/Screenshot%20of%20Code%20Working.png?raw=true)
+*Screenshot of Code working to classify the stop gesture in real time with the classification result in terminal*
