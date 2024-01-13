@@ -111,3 +111,58 @@ Adam optimizer is used to search for different weights to make prediction for th
 4. ***Epsilon***. Is a very small number to prevent any division by zero in the implementation (e.g. 10E-8). `Epsilon = 10e-8`  
 5. ***Number of epochs*** =10
 6. ***Batch Size*** = 32
+
+Three models were trained using the above specified criteria and making small changes.The model with the highest accuracy
+and minimum loss was taken.  
+
+![image](https://github.com/chitransh1998/Gesture-Recognition/blob/main/Dataset.png?raw=true)
+*Model training*
+
+## Results
+The training results of the proposed model were found as follows:  
+* Training Loss: 0.1762  
+* Training Accuracy: 99.49%  
+* Test Loss: 0.4382  
+* Test Accuracy: 91.87%
+
+A high training accuracy was observed due to the high amount of data available and well-tuned structure of the neural network. The model was then tested on live images using a webcam and the results were found to be satisfactory.    
+
+![image](https://github.com/chitransh1998/Gesture-Recognition/blob/main/Dataset.png?raw=true)
+*Curves*
+The training and the testing accuracy curves show a steady increase in accuracy as the number of epochs progresses.Similarly,there is consistent decrease the testing and training loss with the subsequent epoch.Hence,the model
+behaves well suited.  
+Previously,I was using simply images with clean background to recognize gestures.Now,with earlier discussed pre-processing techniques it was possible to recognize gestures even without clear backgrounds.  
+
+## Next Steps
+The high training accuracy shows that the model might have overfitted to the training data.Hence,some alternate methods
+and possible changes to improve the model are as follows:
+
+● Regularization: Regularization modifies the objective
+function that we minimize by adding additional terms
+that penalize large weights. In other words, we change
+the objective function so that it becomes Error+λf(θ),
+where f(θ) grows larger as the components of θ grow
+larger and λ is the regularization strength (a
+hyper-parameter for the learning algorithm).The most
+common type of regularization is L2 regularization. It
+can be implemented by augmenting the error function
+with the squared magnitude of all weights in the
+neural network. In other words, for every weight w in
+the neural network, we add 1/2 λw^2 to the error
+function. The L2 regularization has the intuitive
+interpretation of heavily penalizing "peaky" weight
+vectors and preferring diffuse weight vectors
+● Early stopping : With early stopping, the choice of the
+validation set is also important. The validation set
+should be representative of all points in the training
+set.When you use Bayesian regularization, it is
+important to train the network until it reaches
+convergence. The sum-squared error, the sum-squared
+weights, and the effective number of parameters
+should reach constant values when the network has
+converged.
+● Data Augmentation:There are some data augmentation
+techniques such as scaling, translation, rotation,
+flipping,resizing.Data augmentation can help reduce
+the manual interventation required to developed
+meaningful information and insight of business data,
