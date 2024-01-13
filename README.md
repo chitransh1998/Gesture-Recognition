@@ -152,3 +152,22 @@ These changes are to be made in the future versions of this model.Some of the re
 
 ![image](https://github.com/chitransh1998/Gesture-Recognition/blob/main/Screenshot%20of%20Code%20Working.png?raw=true)
 *Screenshot of Code working to classify the stop gesture in real time with the classification result in terminal*
+
+## Code Working
+
+1. **Main.py**
+Contains the main code to run the model using the pre-trained weights stored in the weights.hdf file. The user can select the mode viz. Binary or Skin mode processing by pressing 1 or 2 when asked.
+Please place the hand in the green box to get the result. Also,please use right hand as the network has been trained with a right hand dataset
+
+2. **CNN Train.py**
+Contains code to build the model in Keras and also train it with the dataset stored in the Dataset folder
+
+3. **Data Augmentation.py**
+Contains code to generated augmented data
+
+4. **Skin Mode Processing.py**
+Contains code to generate skin mode processed images
+
+5. **Binary Mode Processing.py**
+Contains code to generate Binary mode processed images
+
